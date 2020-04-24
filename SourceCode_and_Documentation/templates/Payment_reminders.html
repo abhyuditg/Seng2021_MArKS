@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Reminders</title>
+    <link rel="stylesheet" href={{url_for('static', filename="style.css")}}>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<script>
+    $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script>
+</head>
+<body>
+
+  <nav class = "main_nav">
+    <div class = "bank_logo">
+      <img src="../static/logo.png" alt = "">
+    </div>
+    <label class="bank_name">Bankquire</label>
+    <ul class = "links_left">
+      <li><a href="Transaction_history">Home<i class="fas fa-angle-down"></i></a></li>
+
+      <li><a href="Expenditure">Expenditure<i class="fas fa-angle-down"></i></a></li>
+      <li><a href="Payment_reminders">Payment Reminders<i class="fas fa-angle-down"></i></a></li>
+      <li><a href="Offers">Offers<i class="fas fa-angle-down"></i></a></li>
+      <li><a href="Projections">Projections<i class="fas fa-angle-down"></i></a></li>
+    </ul>
+    <ul class = "links_right">
+      <li><a href="https://www.macquarie.com/au/en/about/contact.html">Contact Us</a></li>
+      <li><a href="/"><i class="fas fa-sign-out-alt"></i>Log Out</a></li>
+    </ul>
+  </nav>
+
+  <div class = "background1">
+    <img src = "https://www.nab.com.au/content/dam/nabrwd/About-Us/security/cyber-safety-tips-business/cyber-safety-business-understanding-the-value-of-your-business-data.jpg.image.1660.medium.3_8x1.jpg/1523322405149.jpg">
+
+
+
+        <div class = "exp-info">
+      <h1><b>Payment Reminders</b></h1>
+      <hr class = about-line>
+      <p>Keep track of upcoming payments by setting payment reminders</p>
+    </div>
+  </div>
+
+
+<div style = "position: absolute; background-color: black; width: 100%; height: 600px; margin-top: 490px"></div>
+<div style = "position: absolute; background-color: #ddd; width: 44%; height: 600px; margin-top: 490px"></div>
+
+<div style = "position: absolute; color: black; text-align: right; margin-top: 630px; width: 600px">
+<h1><b>Pay Up!</b></h1><br>
+<p>Keep on top of your expenses today.</p>
+<p>Create reminders to increase the accuracy of your monthly and yearly expenditure expenses</p>
+<p>Create and remove payment reminders to reflect your upcoming payments.</p>
+</div>
+
+<div>
+<img src = "https://keysight-h.assetsadobe.com/is/image/content/dam/keysight/en/img/about/corporate-social-responsibility/csr_environment_1200x900.png" alt = "" style = "width: 450px; border: 5px solid #ddd; position: absolute; margin-left: 930px; margin-top: 700px">
+    <img src = "https://www.nab.com.au/content/dam/nabrwd/business/international/financial-markets/images/business-meeting-in-cafe-laptop-2500x900.jpg.image.1660.medium.2x1.jpg/1570149102690.jpg" alt = "" style = "width: 450px; border: 5px solid #ddd; position: absolute; margin-left: 770px; margin-top: 550px">
+
+</div>
+<div style = "position: absolute; background-color: black; width: 700px; height: 600px; float: left; margin-bottom: 10%; margin-left: 165px; margin-top: 1200px"></div>
+<div style = "background-color: #ddd; width: 550px; height: 500px; position: absolute; margin-left: 795px; margin-top: 1250px"></div>
+<table id = "reminders">
+    <th>Date</th>
+    <th>Amount</th>
+    <th>Description</th>
+    {% for obj in remin_list %}
+    <tr>
+        <td>{{ obj[0] }}</td>
+        <td>{{ obj[1] }}</td>
+        <td>{{obj[2] }}</td>
+        <td style = "background-color: black; width: 50px"><input type="submit" value="Delete" onclick="remReminder(this)" style = "margin-left: 10px; padding: 5px; border-radius: 5px"></td>
+    </tr>
+    {% endfor %}
+    {% if error %}
+        <p class="error" style="color: red; position: absolute; margin-top: 1700px; margin-left: 850px"><strong>Error:</strong> {{ error }}
+    {% endif %}
+</table>
+
+<style>
+    #reminders {
+      border-collapse: collapse;
+      width: 38%;
+      position: absolute;
+      margin-top: 1250px;
+      margin-left: 210px;
+    }
+
+    #reminders td, #reminders th {
+      border: 1px solid black;
+      padding: 8px;
+    }
+
+    #reminders tr:nth-child(even){background-color: #f2f2f2;}
+    #reminders tr:nth-child(odd){background-color: #f2f2f2;}
+    #reminders tr:hover {background-color: #ddd;}
+
+    #reminders th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #ddd;
+      color: black;
+    }
+</style>
+
+
+<script>
+function remReminder(r) {
+    var i = r.parentNode.parentNode.rowIndex;
+
+        var date = document.getElementById("reminders").rows[i].cells[0].innerHTML
+        var amount = document.getElementById("reminders").rows[i].cells[1].innerHTML
+        var desc = document.getElementById("reminders").rows[i].cells[2].innerHTML
+        $.ajax({
+        type: "DELETE",
+        data: {d1 : date, a1 : amount, d2 : desc}, // post values
+        success:function(result){
+            window.location.href = $SCRIPT_ROOT + '/Payment_reminders';
+        }
+    });
+    document.getElementById("reminders").deleteRow(i);
+
+}
+</script>
+
+
+
+<div style = "position: absolute; margin-top: 1300px; margin-left: 850px">
+    <label for = "title" style = "color: black; font-size: 30px; margin-left: 28px"><b>Create a New Reminder</b></label><br>
+    <form method="post">
+          <label for="description" style = "margin-bottom: 10px; color: black; font-size: 18px">Description:</label><br>
+          <input class = "f1" type="text" id="description" name="description" placeholder="Description" value="{{request.form.description }}" required><br>
+          <label for="amount" style = "margin-bottom: 10px; color: black; font-size: 18px">Amount:</label><br>
+          <input class = "f1" type="text" id="amount" name="amount" placeholder="Amount" value="{{request.form.amount }}" required><br>
+        <label class="control-label" for="date" style = "margin-bottom: 10px; color: black; font-size: 18px" >Payment Date:</label><br>
+        <input class = "f1" id="date" name="date" placeholder="MM/DD/YYYY" value="{{request.form.date }}" required>
+           <input type="submit" value="Submit" style="background-color: black; color: white; width: 400px; padding: 8px 20px; border: none; border-radius: 4px; cursor: pointer; margin-top: 15px">
+     </form>
+ </div>
+
+<style>
+.f1 {
+  width: 400px;
+  padding: 8px 10px;
+  margin: 0px 0px 15px 0px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+}
+</style>
+
+<div style = "position: relative; margin-top: 1900px">
+    <style>
+* {box-sizing: border-box;}
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif;}
+
+.month {
+  padding: 70px 25px;
+  width: 100%;
+  background: #1abc9c;
+  text-align: center;
+}
+
+.month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.month ul li {
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.month .prev {
+  float: left;
+  padding-top: 10px;
+}
+
+.month .next {
+  float: right;
+  padding-top: 10px;
+}
+
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color: #ddd;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13.6%;
+  color: #666;
+  text-align: center;
+}
+
+.days {
+  padding: 10px 0;
+  background: #eee;
+  margin: 0;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 13.6%;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size:12px;
+  color: #777;
+}
+
+.days li .active {
+  padding: 5px;
+  background: #1abc9c;
+  color: white !important
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+  .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+  .weekdays li, .days li {width: 12.5%;}
+  .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+  .weekdays li, .days li {width: 12.2%;}
+}
+</style>
+
+<div class="month">
+  <ul>
+    <li>
+      APRIL<br>
+      <span style="font-size:18px">2020</span>
+    </li>
+  </ul>
+</div>
+
+<ul class="weekdays">
+  <li>Mo</li>
+  <li>Tu</li>
+  <li>We</li>
+  <li>Th</li>
+  <li>Fr</li>
+  <li>Sa</li>
+  <li>Su</li>
+</ul>
+
+<ul class="days">
+  <li></li>
+  <li></li>
+  <li>01</li>
+  <li>02</li>
+  <li>03</li>
+  <li>04</li>
+  <li>05</li>
+  <li>06</li>
+  <li>07</li>
+  <li>08</li>
+  <li>09</li>
+  <li>10</li>
+  <li>11</li>
+  <li>12</li>
+  <li>13</li>
+  <li>14</li>
+  <li>15</li>
+  <li>16</li>
+  <li>17</li>
+  <li>18</li>
+  <li>19</li>
+  <li>20</li>
+  <li>21</li>
+  <li>22</li>
+  <li>{% if new[3:5] == '23' %}
+      <span class="active">23</span>
+      {% else %}
+      23
+      {% endif %}</li>
+  <li>{% if new[3:5] == '24' %}
+      <span class="active">24</span>
+      {% else %}
+      24
+      {% endif %}</li>
+  <li>{% if new[3:5] == '25' %}
+      <span class="active">25</span>
+      {% else %}
+      25
+      {% endif %}</li>
+  <li>{% if new[3:5] == '26' %}
+      <span class="active">26</span>
+      {% else %}
+      26
+      {% endif %}</li>
+  <li>{% if new[3:5] == '27' %}
+      <span class="active">27</span>
+      {% else %}
+      27
+      {% endif %}
+  </li>
+  <li>{% if new[3:5] == '28' %}
+      <span class="active">28</span>
+      {% else %}
+      28
+      {% endif %}</li>
+  <li>{% if new[3:5] == '29' %}
+      <span class="active">29</span>
+      {% else %}
+      29
+      {% endif %}</li>
+    <li><span class="active">30</span></li>
+</ul>
+</div>
+
+</html>

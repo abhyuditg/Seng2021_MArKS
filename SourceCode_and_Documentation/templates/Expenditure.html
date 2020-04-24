@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expenditure</title>
+    <link rel="stylesheet" href={{url_for('static', filename="style.css")}}>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+<script>
+    $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script>
+    <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="date1"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script>
+  <style>
+      a:hover {
+      text-shadow: 1px 1px;
+      }
+  </style>
+</head>
+<body>
+
+  <nav class = "main_nav">
+    <div class = "bank_logo">
+      <img src="../static/logo.png" alt = "">
+    </div>
+    <label class="bank_name">Bankquire</label>
+    <ul class = "links_left">
+      <li><a href="Transaction_history">Home<i class="fas fa-angle-down"></i></a></li>
+
+      <li><a href="Expenditure">Expenditure<i class="fas fa-angle-down"></i></a></li>
+      <li><a href="Payment_reminders">Payment Reminders<i class="fas fa-angle-down"></i></a></li>
+      <li><a href="Offers">Offers<i class="fas fa-angle-down"></i></a></li>
+      <li><a href="Projections">Projections<i class="fas fa-angle-down"></i></a></li>
+    </ul>
+    <ul class = "links_right">
+      <li><a href="https://www.macquarie.com/au/en/about/contact.html">Contact Us</a></li>
+      <li><a href="/"><i class="fas fa-sign-out-alt"></i>Log Out</a></li>
+    </ul>
+  </nav>
+
+  <div class = "background1">
+    <img src = "https://shannonhartigan.com.au/wp-content/uploads/2018/08/Horseshoe-sunset.jpg">
+    
+        <div class = "exp-info">
+      <h1><b>Expenditure</b></h1>
+      <hr class = about-line>
+      <p>View categorised expenses and compare your expenses across different age groups.</p>
+    </div>
+  </div>
+
+
+<div style = "position: absolute; background-color: #ddd; width: 100%; height: 600px; margin-top: 480px"></div>
+<div style = "position: absolute; background-color: black; width: 44%; height: 600px; margin-top: 480px"></div>
+<div class = "side-text" style = "position: absolute; color: white; text-align: right; margin-top: 690px; width: 600px">
+
+  <h1><b>Comparisons</b></h1>
+  <p>Select the relevant buttons above the table to compare your yearly spendings with the average person in other age categories.</p>
+</div>
+
+  <div class = "btns" style = "position: absolute; margin-left: 48.3%; margin-top: 545px">
+  <button class = "age" onclick="myFunction1()">0-25</button>
+  <button class = "age" onclick="myFunction2()">26-35</button>
+  <button class = "age" onclick="myFunction3()">36-45</button>
+  <button class = "age" onclick="myFunction4()">46-55</button>
+  <button class = "age" onclick="myFunction5()">56-65</button>
+  <button class = "age" onclick="myFunction6()">65+</button>
+  </div>
+  <br></br>
+
+<div class="comp_table" style = "position: absolute; float: right; margin-left: 49%; margin-top: 605px">
+
+<table id = "comparisons">
+  <tr>
+  <th style="text-align:center">Category</th>
+  <th style="text-align:center">Your Spendings</th>
+  <th style="text-align:center">Other Spendings</th>
+  </tr>
+  <tr>
+      <td>Housing</td>
+      <td>{{categories['Housing']}}</td>
+      <td>$$$</td>
+  </tr>
+  <tr>
+      <td>Food</td>
+      <td>{{categories['Food']}}</td>
+      <td>$$$</td>
+  </tr>
+  <tr>
+      <td>Phone</td>
+      <td>{{categories['Phone']}}</td>
+      <td>$$$</td>
+  </tr>
+  <tr>
+      <td>Entertainment</td>
+      <td>{{categories['Entertainment']}}</td>
+      <td>$$$</td>
+  </tr>
+  <tr>
+      <td>Travel</td>
+      <td>{{categories['Travel']}}</td>
+      <td>$$$</td>
+  </tr>
+  <tr>
+      <td>Car</td>
+      <td>{{categories['Car']}}</td>
+      <td>$$$ </td>
+  </tr>
+  <tr>
+      <td>Health</td>
+      <td>{{categories['Health']}}</td>
+      <td>$$$</td>
+  </tr>
+</table>
+</div>
+<style>
+#comparisons {
+  border-collapse: collapse;
+  width: 700px;
+}
+
+#comparisons td, #comparisons th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#comparisons tr:nth-child(even){background-color: #f2f2f2;}
+
+#comparisons tr:hover {background-color: #ddd;}
+
+#comparisons th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: black;
+  color: white;
+}
+.age {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 10px;
+  margin-right: 8px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  padding: 17px;
+  padding-left:27px;
+  padding-right:27px;
+  border-radius: 5px;
+}
+
+.btns {
+    margin-right: 5px;
+}
+.age:hover {
+  background-color: black;
+  color: white;
+}
+</style>
+<script>
+function myFunction1() {
+  var x = document.getElementById("comparisons").rows[1].cells;
+  x[2].innerHTML = "$30,373";
+
+  var x = document.getElementById("comparisons").rows[2].cells;
+  x[2].innerHTML = "$4,698";
+
+  var x = document.getElementById("comparisons").rows[3].cells;
+  x[2].innerHTML = "$361";
+
+  var x = document.getElementById("comparisons").rows[4].cells;
+  x[2].innerHTML = "$2,200";
+
+  var x = document.getElementById("comparisons").rows[5].cells;
+  x[2].innerHTML = "$2,000";
+
+  var x = document.getElementById("comparisons").rows[6].cells;
+  x[2].innerHTML = "$847";
+
+  var x = document.getElementById("comparisons").rows[7].cells;
+  x[2].innerHTML = "$567";
+
+}
+function myFunction2() {
+  var x = document.getElementById("comparisons").rows[1].cells;
+  x[2].innerHTML = "$48,087";
+
+  var x = document.getElementById("comparisons").rows[2].cells;
+  x[2].innerHTML = "$6,198";
+
+  var x = document.getElementById("comparisons").rows[3].cells;
+  x[2].innerHTML = "$486";
+
+  var x = document.getElementById("comparisons").rows[4].cells;
+  x[2].innerHTML = "$2,894";
+
+  var x = document.getElementById("comparisons").rows[5].cells;
+  x[2].innerHTML = "$7,891";
+
+  var x = document.getElementById("comparisons").rows[6].cells;
+  x[2].innerHTML = "$1,390";
+
+  var x = document.getElementById("comparisons").rows[7].cells;
+  x[2].innerHTML = "$1,429";
+
+
+}
+function myFunction3() {
+  var x = document.getElementById("comparisons").rows[1].cells;
+  x[2].innerHTML = "$58,784";
+
+  var x = document.getElementById("comparisons").rows[2].cells;
+  x[2].innerHTML = "$7,921";
+
+  var x = document.getElementById("comparisons").rows[3].cells;
+  x[2].innerHTML = "$638";
+
+  var x = document.getElementById("comparisons").rows[4].cells;
+  x[2].innerHTML = "$2,958";
+
+  var x = document.getElementById("comparisons").rows[5].cells;
+  x[2].innerHTML = "$17,146";
+
+  var x = document.getElementById("comparisons").rows[6].cells;
+  x[2].innerHTML = "2,880";
+
+  var x = document.getElementById("comparisons").rows[7].cells;
+  x[2].innerHTML = "$3,910";
+
+
+}
+function myFunction4() {
+ var x = document.getElementById("comparisons").rows[1].cells;
+  x[2].innerHTML = "$60,524";
+
+  var x = document.getElementById("comparisons").rows[2].cells;
+  x[2].innerHTML = "$7,907";
+
+  var x = document.getElementById("comparisons").rows[3].cells;
+  x[2].innerHTML = "$682";
+
+  var x = document.getElementById("comparisons").rows[4].cells;
+  x[2].innerHTML = "$3,070";
+
+  var x = document.getElementById("comparisons").rows[5].cells;
+  x[2].innerHTML = "$18,891";
+
+  var x = document.getElementById("comparisons").rows[6].cells;
+  x[2].innerHTML = "$2,371";
+
+  var x = document.getElementById("comparisons").rows[7].cells;
+  x[2].innerHTML = "$3,025";
+
+
+}
+function myFunction5() {
+var x = document.getElementById("comparisons").rows[1].cells;
+  x[2].innerHTML = "$55,892";
+
+  var x = document.getElementById("comparisons").rows[2].cells;
+  x[2].innerHTML = "$6,711";
+
+  var x = document.getElementById("comparisons").rows[3].cells;
+  x[2].innerHTML = "$587";
+
+  var x = document.getElementById("comparisons").rows[4].cells;
+  x[2].innerHTML = "$2,651";
+
+  var x = document.getElementById("comparisons").rows[5].cells;
+  x[2].innerHTML = "$13,078";
+
+  var x = document.getElementById("comparisons").rows[6].cells;
+  x[2].innerHTML = "$1,689";
+
+  var x = document.getElementById("comparisons").rows[7].cells;
+  x[2].innerHTML = "$2,819";
+
+}
+function myFunction6() {
+var x = document.getElementById("comparisons").rows[1].cells;
+  x[2].innerHTML = "$40,569";
+
+  var x = document.getElementById("comparisons").rows[2].cells;
+  x[2].innerHTML = "$5,082";
+
+  var x = document.getElementById("comparisons").rows[3].cells;
+  x[2].innerHTML = "$368";
+
+  var x = document.getElementById("comparisons").rows[4].cells;
+  x[2].innerHTML = "$1,623";
+
+  var x = document.getElementById("comparisons").rows[5].cells;
+  x[2].innerHTML = "$8,102";
+
+  var x = document.getElementById("comparisons").rows[6].cells;
+  x[2].innerHTML = "$1,023";
+
+  var x = document.getElementById("comparisons").rows[7].cells;
+  x[2].innerHTML = "$3,591";
+
+
+}
+</script>
+<div style = "position: absolute; background-color: #f2f2f2; width: 700px; height: 600px; float: left; margin-bottom: 10%; margin-left: 165px; margin-top: 1120px"></div>
+<div class = "choose" style = "position: absolute; margin-left: 180px; margin-top: 1100px">
+  <h3><b>Choose a Duration<b></h3>
+</div>
+<div class = "datepicker" style = "position: absolute; margin-left: 300px; margin-top: 1300px">
+<form method="post">
+      <div class="form-group">
+        <label class="control-label" for="date" style = "margin-bottom: 10px">From:</label>
+        <input class="form-control" id="date" name="date" placeholder="DD/MM/YYY" value="{{request.form.date }}" required>
+          <label class="control-label" for="date" style = "margin-top: 30px">To:</label>
+        <input class="form-control" id="date1" name="date1" placeholder="DD/MM/YYY" value= "{{request.form.date1 }}" required>
+          <button type="submit" class="submit" style="background-color: black; width: 400px; padding: 8px 20px; margin 8px 0; border: none; border-radius: 4px; cursor: pointer; margin-top: 40px"><font color="white">Submit</font></button>
+      </div>
+     </form>
+
+
+</div>
+<div style = "background-color: black; width: 550px; height: 500px; position: absolute; margin-left: 780px; margin-top: 1170px">
+    <script type = "text/javascript" src={{url_for('static', filename="categoryPie.js")}}></script>
+    <script type = "text/javascript" src={{url_for('static', filename="money.js")}}></script>
+    <div class="pie-chart" style = "width: 150%; position: absolute; top: 50%; -ms-transform: translateY(30%); transform: translateY(-50%)">
+      <canvas id="pie-expenditure"></canvas>
+    </div>
+</div>
+
+
+
+
+        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo3" style="margin-top: 1800px; width: 100%; margin-bottom: 4%; padding: 1%; background-color: black; font-weight: bold; align: middle; color: white;border-color: black">Transaction History <i class="fas fa-angle-down"></i></button>
+        
+        <div id="demo3" class="collapse">
+        <table id = "myTable1" style="width: 80%; margin: 10%; margin-top: 1%">
+            <tr>
+
+            <th style="text-align: left; text-weight: bold">Date</th>
+            <th style="text-align: left; text-weight: bold">Description</th>
+            <th style="text-align: left; text-weight: bold">Amount</th>
+            </tr>
+            {% for obj in trans_list %}
+            <tr>
+                <td>{{ obj.date }}</td>
+                <td>
+                {{ obj.description}}
+                 </td>
+                <td>{{obj.amount}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        </div>
+
+
+
+<style>
+#myTable1 {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#myTable1 th, #myTable1 td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+#myTable1 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #ddd;
+  color: white;
+
+#myTable1 tr:hover {background-color: black;}
+
+}
+</style>
+<script>
+$(document).ready(function () {
+	var ctx = $("#pie-expenditure");
+  	var data1 = {
+  		labels : ["Housing", "Food", "Phone", "Entertainment", "Travel", "Car", "Other", "Health"],
+  		datasets : [
+  			{
+  				data : data_transac,
+  				backgroundColor : [
+                      "#ebb7d5",
+                      "#a5e6e3",
+                      "#d0a7e8",
+                      "#fcbc8d",
+                      "#e6a5b7",
+                      "#b3e092",
+                      "#a3e7f7",
+                      "#99e0a4"
+                  ],
+									borderAlign : "inner"
+
+  			}
+  		]
+  	};
+
+
+  	var options = {
+  		legend : {
+  			display : false,
+  			position : "right",
+  			boxWidth : 40,
+  			fontSize : 20
+  			
+  			
+  		},
+  		layout: {
+            padding: {
+                left: 0,
+                right: 260,
+                top: 10,
+                bottom: 10
+            }
+        }
+  	};
+
+
+  	var chart1 = new Chart( ctx, {
+  		type : "pie",
+  		data : data1,
+  		options : options
+  	});
+    
+    var Housing1 = Housing;
+    var Food1 = Food;
+    var Phone1 = Phone;
+    var Phone3 = Phone2;
+    var Entertainment1 = Entertainment;
+    var Travel1 = Travel;
+    var Car1 = Car;
+    var Other1 = Other;
+    var Health1 = Health;
+    var canvas = document.getElementById("pie-expenditure");    
+    canvas.onclick = function(evt) {
+      var activePoints = chart1.getElementsAtEvent(evt);
+      if (activePoints[0]) {
+        var chartData = activePoints[0]['_chart'].config.data;
+        var idx = activePoints[0]['_index'];
+        var label = chartData.labels[idx];
+        var value = chartData.datasets[0].data[idx];
+        
+        if(JSON.stringify(label)==JSON.stringify("Other")) {
+            var i;
+	        for (i = Num; i != 0; i--) { 
+  		        document.getElementById("myTable1").deleteRow(i);
+	        }
+	        var n;
+	        var table = document.getElementById("myTable1");
+	        var m = 0;
+	        for (n = 1; n != Other2+1; n++) {
+	            var row = table.insertRow(n);
+	            var cell1 = row.insertCell(0);
+	            var cell2 = row.insertCell(1);
+	            var cell3 = row.insertCell(2);
+	            cell1.innerHTML = Other1[m][0];
+                cell2.innerHTML = Other1[m][2];
+                cell3.innerHTML = Other1[m][1];
+                m = m + 1;
+	        }
+	        Num = Other2;
+        }
+        if(JSON.stringify(label)==JSON.stringify("Housing")) {
+            var i;
+	        for (i = Num; i != 0; i--) { 
+  		        document.getElementById("myTable1").deleteRow(i);
+	        }
+	        var n;
+	        var table = document.getElementById("myTable1");
+	        var m = 0;
+	        for (n = 1; n != Housing2+1; n++) {
+	            var row = table.insertRow(n);
+	            var cell1 = row.insertCell(0);
+	            var cell2 = row.insertCell(1);
+	            var cell3 = row.insertCell(2);
+	            cell1.innerHTML = Housing1[m][0];
+                cell2.innerHTML = Housing1[m][2];
+                cell3.innerHTML = Housing1[m][1];
+                m = m + 1;
+	        }
+	        Num = Housing2;
+        }
+        if(JSON.stringify(label)==JSON.stringify("Phone")) { 
+            var i;
+	        for (i = Num; i != 0; i--) { 
+  		        document.getElementById("myTable1").deleteRow(i);
+	        }
+	        var n;
+	        var table = document.getElementById("myTable1");
+	        var m = 0;
+	        for (n = 1; n != Phone2+1; n++) {
+	            var row = table.insertRow(n);
+	            var cell1 = row.insertCell(0);
+	            var cell2 = row.insertCell(1);
+	            var cell3 = row.insertCell(2);
+	            cell1.innerHTML = Phone1[m][0];
+                cell2.innerHTML = Phone1[m][2];
+                cell3.innerHTML = Phone1[m][1];
+                m = m + 1;
+	        }
+	        Num = Phone2;
+        } 
+        if(JSON.stringify(label)==JSON.stringify("Entertainment")) {
+            var i;
+	        for (i = Num; i != 0; i--) { 
+  		        document.getElementById("myTable1").deleteRow(i);
+	        }
+	        var n;
+	        var table = document.getElementById("myTable1");
+	        var m = 0;
+	        for (n = 1; n != Entertainment2+1; n++) {
+	            var row = table.insertRow(n);
+	            var cell1 = row.insertCell(0);
+	            var cell2 = row.insertCell(1);
+	            var cell3 = row.insertCell(2);
+	            cell1.innerHTML = Entertainment1[m][0];
+                cell2.innerHTML = Entertainment1[m][2];
+                cell3.innerHTML = Entertainment1[m][1];
+                m = m + 1;
+	        }
+	        Num = Entertainment2;
+        }
+        if(JSON.stringify(label)==JSON.stringify("Travel")) {
+            var i;
+	        for (i = Num; i != 0; i--) { 
+  		        document.getElementById("myTable1").deleteRow(i);
+	        }
+	        var n;
+	        var table = document.getElementById("myTable1");
+	        var m = 0;
+	        for (n = 1; n != Travel2+1; n++) {
+	            var row = table.insertRow(n);
+	            var cell1 = row.insertCell(0);
+	            var cell2 = row.insertCell(1);
+	            var cell3 = row.insertCell(2);
+	            cell1.innerHTML = Travel1[m][0];
+                cell2.innerHTML = Travel1[m][2];
+                cell3.innerHTML = Travel1[m][1];
+                m = m + 1;
+	        }
+	        Num = Travel2;
+        }
+        if(JSON.stringify(label)==JSON.stringify("Car")) {
+            var i;
+	        for (i = Num; i != 0; i--) { 
+  		        document.getElementById("myTable1").deleteRow(i);
+	        }
+	        var n;
+	        var table = document.getElementById("myTable1");
+	        var m = 0;
+	        for (n = 1; n != Car2+1; n++) {
+	            var row = table.insertRow(n);
+	            var cell1 = row.insertCell(0);
+	            var cell2 = row.insertCell(1);
+	            var cell3 = row.insertCell(2);
+	            cell1.innerHTML = Car1[m][0];
+                cell2.innerHTML = Car1[m][2];
+                cell3.innerHTML = Car1[m][1];
+                m = m + 1;
+	        }
+	        Num = Car2;
+        }
+        if(JSON.stringify(label)==JSON.stringify("Health")) { 
+            var i;
+	        for (i = Num; i != 0; i--) { 
+  		        document.getElementById("myTable1").deleteRow(i);
+	        }
+	        var n;
+	        var table = document.getElementById("myTable1");
+	        var m = 0;
+	        for (n = 1; n != Health2+1; n++) {
+	            var row = table.insertRow(n);
+	            var cell1 = row.insertCell(0);
+	            var cell2 = row.insertCell(1);
+	            var cell3 = row.insertCell(2);
+	            cell1.innerHTML = Health1[m][0];
+                cell2.innerHTML = Health1[m][2];
+                cell3.innerHTML = Health1[m][1];
+                m = m + 1;
+	        }
+	        Num = Health2;
+        }
+        if(JSON.stringify(label)==JSON.stringify("Food")) {
+            var i;
+	        for (i = Num; i != 0; i--) { 
+  		        document.getElementById("myTable1").deleteRow(i);
+	        }
+	        var n;
+	        var table = document.getElementById("myTable1");
+	        var m = 0;
+	        for (n = 1; n != Food2+1; n++) {
+	            var row = table.insertRow(n);
+	            var cell1 = row.insertCell(0);
+	            var cell2 = row.insertCell(1);
+	            var cell3 = row.insertCell(2);
+	            cell1.innerHTML = Food1[m][0];
+                cell2.innerHTML = Food1[m][2];
+                cell3.innerHTML = Food1[m][1];
+                m = m + 1;
+	        }
+	        Num = Food2;
+        }
+      }
+    };
+  });
+
+</script>
+</body>
+</html>

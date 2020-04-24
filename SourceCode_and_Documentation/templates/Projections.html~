@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projections</title>
+    <link rel="stylesheet" href={{url_for('static', filename="style.css")}}>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <style>
+      a:hover {
+      text-shadow: 1px 1px;
+      }
+      h3{
+      font-size: 140%;
+      }
+      h2{
+      font-size: 140%;
+      }
+      h4{
+      font-size: 140%;
+      }
+  </style>
+</head>
+<body>
+<nav class = "main_nav">
+    <div class = "bank_logo">
+      <img src="../static/logo.png" alt = "">
+    </div>
+    <label class="bank_name">Bankquire</label>
+    <ul class = "links_left">
+      <li><a href="Transaction_history">Home<i class="fas fa-angle-down"></i></a></li>
+
+      <li><a href="Expenditure">Expenditure<i class="fas fa-angle-down"></i></a></li>
+      <li><a href="Payment_reminders">Payment Reminders<i class="fas fa-angle-down"></i></a></li>
+      <li><a href="Offers">Offers<i class="fas fa-angle-down"></i></a></li>
+      <li><a href="Projections">Projections<i class="fas fa-angle-down"></i></a></li>
+    </ul>
+    <ul class = "links_right">
+      <li><a href="https://www.macquarie.com/au/en/about/contact.html">Contact Us</a></li>
+      <li><a href="/"><i class="fas fa-sign-out-alt"></i>Log Out</a></li>
+    </ul>
+  </nav>
+      <div class = "background1">
+    <img src = "https://www.nab.com.au/content/dam/nabcampaigns/Business/business-package-selector/images/property.jpg.image.full.medium.3_25x1.jpg/1531880950143.jpg">
+    
+        <div class = "exp-info">
+      <h1><b>Projections</b></h1>
+      <hr class = about-line>
+      <p>Our Website Uses state of the art algorithms to project your Savings and Expenses based on your transaction history, spend habits and up-coming payments.</p>
+    </div>
+  </div>
+    <br></br>
+    <div style = "position: absolute; width: 450px; padding: 20px; margin-top: 550px; right: 100px; background-color: #f8f8f8; border: 8px solid lightgrey">
+      <h2><b>Monthly Expenditure</b></h2>
+      <p>This graph shows your expenses for the last 12 months.</p>
+    </div>
+      <script type = "text/javascript" src={{url_for('static', filename="data_me.js")}}></script>        
+      <div class="month-expenditure" style="  width: 45%; height:50vh; width:52vw; float: left; margin: 4%; margin-top: 29%; margin-bottom: 7%;">
+        <canvas id="bar-me"></canvas>
+      </div>
+
+<!-- javascript -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+ <script src={{url_for('static', filename="me12.js")}}></script>
+ <div style = "position: absolute; width: 450px; padding: 20px; margin-top: 1000px; right: 100px; background-color: #f8f8f8; border: 8px solid lightgrey">
+      <h3><b>Projected Monthly Expenditure</b></h3>
+      <p>Based on your previous transactions we have predicted your monthly expenses for the next 12 months</p>
+    </div>
+<div class="form-group" style="margin: 10%, left = 100px; margin-top: 30%; height:60vh; width:60vw">
+    <div class="p-monthly">
+      <canvas id="monthly-projections"></canvas>
+    </div>
+      <script src={{url_for('static', filename="m_projections.js")}}></script>
+  </div>
+  <br></br>
+  <div style = "position: absolute; width: 450px; padding: 20px; margin-top: 530px; right: 100px; background-color: #f8f8f8; border: 8px solid lightgrey">
+      <h4><b>Projected Yearly Expenditure</b></h4>
+      <p>Based on your previous transactions we have predicted your yearly expenses making budgeting and planning alot easier</p>
+    </div>
+    <div class="form-group" style="margin-top: 400px;  bottom = 7 px; left = 100px; height:60vh; width:60vw">
+        <div class="p-yearly">
+          <canvas id="yearly-projections"></canvas>
+        </div>
+          <script src={{url_for('static', filename="y_projections.js")}}></script>
+      </div>
+</body>
+</html>

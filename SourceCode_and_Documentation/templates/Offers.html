@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offers and Schemes</title>
+    <link rel="stylesheet" href={{url_for('static', filename="style.css")}}>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <style>
+      a:hover {
+      text-shadow: 1px 1px;
+      }
+      body {
+        background-color: #F0F0F0;
+     }
+  </style>
+</head>
+<body>
+  <nav class = "main_nav">
+    <div class = "bank_logo">
+      <img src="../static/logo.png" alt = "">
+    </div>
+    <label class="bank_name">Bankquire</label>
+    <ul class = "links_left">
+      <li><a href="Transaction_history">Home<i class="fas fa-angle-down"></i></a></li>
+
+      <li><a href="Expenditure">Expenditure<i class="fas fa-angle-down"></i></a></li>
+      <li><a href="Payment_reminders">Payment Reminders<i class="fas fa-angle-down"></i></a></li>
+      <li><a href="Offers">Offers<i class="fas fa-angle-down"></i></a></li>
+      <li><a href="Projections">Projections<i class="fas fa-angle-down"></i></a></li>
+    </ul>
+    <ul class = "links_right">
+      <li><a href="https://www.macquarie.com/au/en/about/contact.html">Contact Us</a></li>
+      <li><a href="/"><i class="fas fa-sign-out-alt"></i>Log Out</a></li>
+    </ul>
+  </nav>
+
+  <div class = "background1">
+    <img src = "https://wi-images.condecdn.net/image/bAloGGDy7o2/crop/1620/f/waterdroplets1.jpg">
+    
+        <div class = "exp-info">
+      <h1><b>Offers and Schemes</b></h1>
+      <hr class = about-line>
+      <p>Received personalised promotions based on your transaction history.</p>
+    </div>
+  </div>
+
+  
+<div style = "margin-left: 10%; margin-top: 450px">
+<div class = "space"> </div>
+<div class = "row">
+    <div class = "offer1" style = "margin-left: 1%;  width: 350px; height:300px; margin-top: 3%">
+    <div class = "offer1-inner">
+        <img src = "https://specials-images.forbesimg.com/imageserve/1024724898/960x0.jpg?fit=scale" style = "width: 350px; height:200px;">
+      <div class = "offer1-front" style = "border: 0px solid white; background-color: white">
+        <div class = "vertical-align">
+          <hr class = "first">
+      <h1>Save 10% on Exchange Rates</h1>
+      <p> Flip to Learn More</p>
+      <hr class = "first">
+    </div>
+      </div>
+      <div class = "offer1-back" style = "border: 0px solid white; border-bottom: 2px solid black; width: 350px; height:300px;">
+        <div class = "offer1-header"></div>
+        <div class = "offer1-footer">
+          <div class = "alignment">
+          <h2> We suggest you get a transaction account as you get 10% off on eGifts and a traveler mode or exchange rates </h2>
+          <p>Why?  We noticed you spent more than $1000 on Egifts and travel </p>
+          <div style = "colour: #008080">
+          <a href = "https://www.macquarie.com/au/en/about/contact.html">More Info</a>
+        </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    <div class = "offer1" style = "width: 350px; height:300px; margin-left: 3%; margin-right: 5%; margin-top: 3%">
+    <div class = "offer1-inner">
+    <img src = "https://www.verywellmind.com/thmb/Ea5HK8IY-UV2UxIfJr8FWw7s3uY=/2125x1195/smart/filters:no_upscale()/talk-to-doctor-56af37473df78cf772c1a7f6.jpg" style = "width: 350px; height:200px;">
+      <div class = "offer1-front" style = "border: 0px solid white; background-color: white">
+        <div class = "vertical-align">
+          <hr class = "first">
+        <h1>Corona Virus Support</h1>
+        <p> Flip to Learn More</p>
+        <hr class = "first">
+        </div>
+      </div>
+      <div class = "offer1-back" style = "border: 0px solid white; border-bottom: 2px solid black; width: 350px; height:300px;">
+        <div class = "offer1-header"></div>
+        <div class = "offer1-footer">
+          <div class = "alignment">
+          <h2> Apply for a relief on your insurance</h2>
+          <p>Why? We noticed your income has reduced. Is it due to the corona virus? </p>
+          <a href = "https://www.macquarie.com/au/en/about/contact.html"> More Info</a>
+        </div>
+
+        </div>
+      </div>
+
+    </div>
+    </div>
+    <div class = "offer1" style = "margin-left: 1%; width: 350px; height:300px; margin-top: 3%">
+    <div class = "offer1-inner">
+    <img src = "https://www.macquarie.com.au/assets/bfs/images/imported/bespoke/biancha-payment-terminal-with-apple-watch_4-3.jpg" style = "width: 350px; height:200px;">
+      <div class = "offer1-front" style = "border: 0px solid white; background-color: white">
+        <div class = "vertical-align">
+          <hr class = "first">
+        <h1>Pay with your phone or watch</h1>
+        <p> Flip to Learn More</p>
+        <hr class = "first">
+      </div>
+    </div>
+      <div class = "offer1-back" style = "border: 0px solid white; border-bottom: 2px solid black; width: 350px; height:300px;">
+        <div class = "offer1-header"></div>
+        <div class = "offer1-footer">
+          <div class = "alignment">
+          <h2> Don't forget to add apple pay to your phone to shop easily</h2>
+          <p>Why? We noticed you bought an iphone </p>
+          <a href = "https://www.macquarie.com/au/en/about/contact.html">More Info</a>
+        </div>
+
+        </div>
+      </div>
+
+    </div>
+    </div>
+</div>
+<div class = "row">
+    <div class = "offer1" style = "margin-left: 1%; margin-top: 15%; width: 350px; height:300px">
+    <div class = "offer1-inner">
+    <img src = "https://social.usq.edu.au/-/media/usq/social/study-tips/blogs/emma-three-ways-to-motivate-yourself-and-achieve-your-goals.ashx" style = "width: 350px; height:200px">
+      <div class = "offer1-front" style = "border: 0px solid white; background-color: white">
+        <div class = "vertical-align">
+          <hr class = "first">
+        <h1>Interest Rates over 1.35% p.a</h1>
+        <p> Flip to Learn More</p>
+        <hr class = "first">
+      </div>
+    </div>
+      <div class = "offer1-back" style = "border: 0px solid white; border-bottom: 2px solid black; width: 350px; height:300px">
+        <div class = "offer1-header"></div>
+        <div class = "offer1-footer">
+          <div class = "alignment">
+            <h2> Create a savings account at the start of the year to receive a variable rate of 1.35% p.a. if you have a savings balance between $0.00 to $24,999.99.</h2>
+            <p>Why? We noticed you spent more than $1000 on gifts every December</p>
+          <a href = "https://www.macquarie.com/au/en/about/contact.html">More Info</a>
+        </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class = "offer1" style = "width: 350px; height:300px; margin-left: 3%; margin-top: 15%">
+    <div class = "offer1-inner">
+    <img src = "https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/10/24/22/istock-639223110-3.jpg?w968h681" style = "width: 350px; height:200px;">
+      <div class = "offer1-front" style = "border: 0px solid white; background-color: white">
+        <div class = "vertical-align">
+          <hr class = "first">
+        <h1>Save on your shopping</h1>
+        <p> Flip to Learn More</p>
+        <hr class = "first">
+      </div>
+    </div>
+      <div class = "offer1-back" style = "border: 0px solid white; border-bottom: 2px solid black; width: 350px; height:300px;">
+        <div class = "offer1-header"></div>
+        <div class = "offer1-footer">
+          <div class = "alignment">
+            <h2> Check out some of the student discounts we offer</h2>
+            <p>Why? You have spent $300 on shopping this month. </p>
+          <a href = "https://www.macquarie.com/au/en/about/contact.html">More Info</a>
+        </div>
+
+        </div>
+      </div>
+
+    </div>
+    </div>
+    <div class = "offer1" style = "width: 350px; height:300px; margin-left: 3%; margin-top: 15%">
+    <div class = "offer1-inner">
+    <img src = "https://raisingchildren.net.au/__data/assets/image/0017/48320/blended-families.jpg" style = "width: 350px; height:200px;">
+      <div class = "offer1-front" style = "border: 0px solid white; background-color: white">
+        <div class = "vertical-align">
+          <hr class = "first">
+        <h1>Earn extra on Savings</h1>
+        <p> Flip to Learn More</p>
+        <hr class = "first">
+      </div>
+    </div>
+      <div class = "offer1-back" style = "border: 0px solid white; border-bottom: 2px solid black; width: 350px; height:300px;">
+        <div class = "offer1-header"></div>
+        <div class = "offer1-footer">
+          <div class = "alignment">
+          <h2> You should create a savings account for money laying around in you account as you can receive a variable rate of 1.35% p.a. for $0.00 to $24,999.99 balance</h2>
+          <p>Why?  We noticed you have more than $200 dollars in you account. </p>
+          <a href = "https://www.macquarie.com/au/en/about/contact.html">More Info</a>
+        </div>
+
+        </div>
+      </div>
+
+    </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
+
+
+  
+  
+  
+  
+  
+  
