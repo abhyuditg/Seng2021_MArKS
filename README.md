@@ -11,9 +11,3 @@ Brief Introduction to problem: The objective of this application is to ensure cu
 
 
 
-
-Deliverable-1 : Contents: Problem Statement, Features, User Stories, Low fidelity, High fidelity
-
-
-Deliverable-2 : PART1: List of webstacks used, component diagram, choice of language with justification and comparison, machine requriments                         and summary
-                PART2: updated list of user stories, sequence diagrams in respect to the use cases
